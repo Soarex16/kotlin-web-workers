@@ -42,3 +42,7 @@ internal class WorkerCoroutineDispatcherImpl(private val workersCount: Int) : Wo
     }
 }
 ```
+
+Также есть [блогпост](https://avwie.github.io/multithreaded-web-applications-in-kotlin-with-web-workers), в котором описывается похожее решение, но более простое за счет того, что просто используются готовые библиотечные примитивы. 
+
+Но тут есть один тонкий момент - worker можно завершить с помощью метода `terminate()`. Т. е. у него потенциально ограниченное время жизни. В случае если мы делаем свой планировщик необходимо либо запрещать завершать воркеры из общего пула, либо обеспечивать корутины соответствующим [скоупом](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/).
